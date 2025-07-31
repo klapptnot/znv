@@ -59,57 +59,55 @@ require ("nvstp.hotrel").setup ()
 require ("nvstp.term").setup ()
 require ("nvstp.palette.whichkey").setup ().map ("<leader>")
 require ("nvstp.statusline").set ({
-  ignore = "Outline,toggleterm",
+  ignore = "neo-tree,Outline,toggleterm",
   bar = {
     "mode",
     "file",
-    "git_branch",
-    "truncate",
-    "lsp_name",
     "lsp_diag",
+    "truncate",
     "shift_to_end",
     "git_stat",
     "cursor_pos",
-    "cwd",
     "file_eol",
     "file_encoding",
     "file_type",
   },
-  colors = { -- Catppuccin with diversified colors
+  colors = {
     mode = {
-      normal = { bg = "#a6e3a1", fg = "#11111b" }, -- Green
-      insert = { bg = "#f5c2e7", fg = "#11111b" }, -- Pink
-      visual = { bg = "#89dceb", fg = "#11111b" }, -- Teal
-      prompt = { bg = "#eba0ac", fg = "#11111b" }, -- Maroon
-      replace = { bg = "#f38ba8", fg = "#11111b" }, -- Red
-      other = { bg = "#f9e2af", fg = "#11111b" }, -- Yellow
+      normal = { bg = "#a6e3a1", fg = "#11111b" },
+      insert = { bg = "#f5c2e7", fg = "#11111b" },
+      visual = { bg = "#89dceb", fg = "#11111b" },
+      prompt = { bg = "#eba0ac", fg = "#11111b" },
+      replace = { bg = "#f38ba8", fg = "#11111b" },
+      other = { bg = "#f9e2af", fg = "#11111b" },
     },
-    cwd = { bg = "#b4befe", fg = "#11111b" }, -- Lavender
+    cwd = { bg = "#2a2d3a", fg = "#cdd6f4" },
     file = {
-      name = { bg = "#cba6f7", fg = "#11111b" }, -- Mauve
-      type = { bg = "#f9e2af", fg = "#11111b" }, -- Yellow
-      eol = { bg = "#bac2de", fg = "#11111b" }, -- Subtext0
-      enc = { bg = "#fab387", fg = "#11111b" }, -- Peach
+      normal = { bg = "#1a1d2a", fg = "#cdd6f4" },
+      modified = { bg = "#1a1d2a", fg = "#f9e2af" },
+      readonly = { bg = "#1a1d2a", fg = "#f38ba8" },
+      type = { bg = "#2a2d3a", fg = "#a6adc8" },
+      eol = { bg = "#1a1d2a", fg = "#6c7086" },
+      enc = { bg = "#1a1d2a", fg = "#9399b2" },
     },
     lsp = {
-      name = { bg = "#94e2d5", fg = "#11111b" }, -- Sky
-      error = { bg = "#f38ba8", fg = "#11111b" }, -- Red
-      hint = { bg = "#89b4fa", fg = "#11111b" }, -- Blue
-      warn = { bg = "#fab387", fg = "#11111b" }, -- Peach
-      info = { bg = "#74c7ec", fg = "#11111b" }, -- Sapphire
+      name = { bg = "#1a1d2a", fg = "#cdd6f4" },
+      error = { bg = "#1a1d2a", fg = "#f38ba8" },
+      hint = { bg = "#1a1d2a", fg = "#89b4fa" },
+      warn = { bg = "#1a1d2a", fg = "#fab387" },
+      info = { bg = "#1a1d2a", fg = "#74c7ec" },
     },
     git = {
-      branch = { bg = "#b4befe", fg = "#11111b" }, -- Lavender
-      changed = { bg = "#f2cdcd", fg = "#11111b" }, -- Flamingo
-      added = { bg = "#a6e3a1", fg = "#11111b" }, -- Green
-      removed = { bg = "#f38ba8", fg = "#11111b" }, -- Red
+      branch = { bg = "#1a1d2a", fg = "#b4befe" },
+      changed = { bg = "#1a1d2a", fg = "#f9e2af" },
+      added = { bg = "#1a1d2a", fg = "#a6e3a1" },
+      removed = { bg = "#1a1d2a", fg = "#f38ba8" },
     },
-    cursor_pos = { bg = "#cdd6f4", fg = "#11111b" }, -- Text
-    inactive = { bg = "#1e1e2e", fg = "#cdd6f4" },
+    cursor_pos = { bg = "#2a2d3a", fg = "#cdd6f4" },
+    inactive = { bg = "#1e1e2e", fg = "#6c7086" },
   },
   separators = {
-    l = "",
-    r = "",
+    r = "",
+    l = "",
   },
-  swap = true,
 }, true)

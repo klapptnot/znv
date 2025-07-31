@@ -64,20 +64,27 @@ function blocks.file (bar, v)
     if dev_icons_loaded then icon = devicons.get_icon (file) or icon end
   end
 
+  local is_readonly = vim.bo.readonly
+  local is_modified = vim.bo.modified
+
+  local color = main.colors.file.normal
+  if is_readonly then
+    color = main.colors.file.readonly
+  elseif is_modified then
+    color = main.colors.file.modified
+  end
+
   bar (
-    main.colors.file.name,
-    "%{getbufvar(bufnr('%'),'&readonly') ? ' ' : ''}"
-    .. icon
-    .. " "
-    .. file
-    .. " (buf: %n)%{getbufvar(bufnr('%'),'&mod')?' ':''}"
+    color,
+    string.format ("%s %s [#%d]", icon, file, vim.fn.bufnr ("%"))
+    .. (is_modified and " " or "")
   )
 end
 
 function blocks.file_type (bar, v) bar (main.colors.file.type, v.bfft) end
 
 function blocks.file_eol (bar, v)
-  bar (main.colors.file.eol, (vim.bo[v.sbuf].fileformat == "unix") and "LF" or "CRLF")
+  bar (main.colors.file.eol, (vim.bo[v.sbuf].fileformat == "unix") and " " or " ")
 end
 
 function blocks.file_encoding (bar, v)
@@ -167,7 +174,7 @@ function main.run ()
   env.ilsp = rawget (vim, "lsp") ~= nil
   env.swap = false
   env.skip = false
-  local sep = main.separators.r
+  local sep = main.separators.l
 
   local function color_and_unions_r (last, curr, id)
     local hg_name = "NvstpSL" .. id
@@ -232,7 +239,7 @@ function main.run ()
         end
         if env.swap then
           last_hg = {}
-          sep = main.separators.l
+          sep = main.separators.r
           color_and_unions = color_and_unions_l
           env.swap = false
         end

@@ -46,6 +46,7 @@ function main.open (opts)
     win = vim.api.nvim_get_current_win (),
     buf = vim.api.nvim_get_current_buf (),
     mod = vim.api.nvim_get_mode ().mode:lower ():sub (1, 1),
+    pos = vim.api.nvim_win_get_cursor (0),
   }
 
   local display_height = math.floor (ui.height / 2) - 5
@@ -130,9 +131,10 @@ function main.open (opts)
   }
 
   local function close_palette ()
+    vim.api.nvim_command ("stopinsert")
     vim.api.nvim_win_close (props.input.win, true)
     vim.api.nvim_win_close (props.display.win, true)
-    vim.schedule (function () vim.api.nvim_command ("stopinsert") end)
+    vim.api.nvim_win_set_cursor(0, props.state.pos)
   end
 
   return close_palette, props

@@ -496,4 +496,12 @@ return {
     desc = "Select all",
     opts = { silent = true, expr = false },
   },
+
+  {
+    mapp = "b",
+    mode = { "n", "v" },
+    exec = api.add_toggle_hlmatch,
+    desc = "Add/Toggle hlmatch",
+    opts = { silent = true, expr = true },
+  },
 }

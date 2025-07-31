@@ -834,4 +834,18 @@ end
 --   })
 -- end
 
+function main.add_toggle_hlmatch ()
+  local current_search = vim.fn.getreg ("/")
+  local is_visible = vim.v.hlsearch == 1
+
+  vim.schedule (function ()
+    local new_search = vim.fn.getreg ("/")
+    if is_visible and new_search == current_search then
+      vim.api.nvim_command("nohlsearch")
+    end
+  end)
+
+  return "*"
+end
+
 return main

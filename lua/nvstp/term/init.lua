@@ -94,6 +94,10 @@ function main.hide (keyname)
     main.new (layout)
     return
   end
+  local all_wins = vim.api.nvim_list_wins ()
+  if #all_wins == 1 and all_wins[1] == main.instances[keyname].win then
+    return
+  end
   vim.api.nvim_win_close (main.instances[keyname].win, true)
   main.instances[keyname].vis = false
   -- Disable insertion mode (Useless most of the time)
