@@ -362,7 +362,7 @@ function main.null_ls ()
       -- If we reach here, the client is null-ls, so proceed with the keymapping
       vim.defer_fn (function ()
         for _, mode in ipairs ({ "n", "v" }) do
-          pcall(vim.api.nvim_buf_del_keymap, bufnr, mode, "<leader>lf")
+          pcall (vim.api.nvim_buf_del_keymap, bufnr, mode, "<leader>lf")
           vim.api.nvim_buf_set_keymap (bufnr, mode, "<leader>lf", "", {
             desc = "[NLS] Format document or selection",
             callback = function ()

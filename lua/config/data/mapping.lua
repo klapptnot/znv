@@ -492,7 +492,7 @@ return {
   {
     mapp = "<C-I>",
     mode = { "v", "n" },
-    exec = "0ggvG",
+    exec = "0ggvG$",
     desc = "Select all",
     opts = { silent = true, expr = false },
   },

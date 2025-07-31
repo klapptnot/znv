@@ -68,9 +68,9 @@ require ("nvstp.statusline").set ({
     "shift_to_end",
     "git_stat",
     "cursor_pos",
-    "file_eol",
     "file_encoding",
     "file_type",
+    "file_eol",
   },
   colors = {
     mode = {

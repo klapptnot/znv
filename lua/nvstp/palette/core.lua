@@ -134,7 +134,7 @@ function main.open (opts)
     vim.api.nvim_command ("stopinsert")
     vim.api.nvim_win_close (props.input.win, true)
     vim.api.nvim_win_close (props.display.win, true)
-    vim.api.nvim_win_set_cursor(0, props.state.pos)
+    vim.api.nvim_win_set_cursor (0, props.state.pos)
   end
 
   return close_palette, props

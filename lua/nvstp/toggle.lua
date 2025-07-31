@@ -36,7 +36,7 @@ end
 --- @param name string The name of the toggle to switch
 function main.toggle (name)
   local exists, idx = tbl.contains (main.toggles.names, name)
-  local dname = name:gsub("-", " "):gsub("^.", string.upper)
+  local dname = name:gsub ("-", " "):gsub ("^.", string.upper)
   if not exists then
     vim.notify ("Toggle '" .. name .. "' not found", vim.log.levels.WARN, { title = "Toggle" })
     return
