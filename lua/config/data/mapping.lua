@@ -183,7 +183,7 @@ return {
 
   {
     mapp = "<C-d>",
-    mode = { "n", "i" },
+    mode = { "i" },
     exec = api.duplicate_line,
     desc = "Duplicate selection",
     opts = _opts_lua,
