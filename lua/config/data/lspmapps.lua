@@ -5,7 +5,7 @@ return {
     meth = "textDocument/documentSymbol",
     mapp = "<C-P>",
     mode = { "n", "i" },
-    exec = require ("nvstp.palette.builtin.lsp_symbols"),
+    exec = require ("znv.palette.builtin.lsp_symbols"),
     desc = "[LSP][P] Function-Jump",
     opts = __opts__,
   },

@@ -18,21 +18,21 @@ end
 -- Space is <leader> key
 vim.g.mapleader = " "
 
-NVSTP = {
+ZNV = {
   less_complex_things = true,
   tweaks = {
     detect_indent = true,
     reset_cursor = true,
     lua_functions = true,
   },
-  cache_path = vim.fs.joinpath (vim.fn.stdpath ("cache"), "nvstp"),
+  cache_path = vim.fs.joinpath (vim.fn.stdpath ("cache"), "znv"),
 }
 
-if not vim.uv.fs_stat (NVSTP.cache_path) then vim.fn.mkdir (NVSTP.cache_path, "p") end
+if not vim.uv.fs_stat (ZNV.cache_path) then vim.fn.mkdir (ZNV.cache_path, "p") end
 
-require ("nvstp.tweaks").apply ()
+require ("znv.tweaks").apply ()
 
---- @type NvstpConfig
+--- @type ZnvConfig
 local config = require ("config")
 
 config.plugins:apply ()
@@ -42,9 +42,11 @@ config
   :map ({ { "<C-z>", "<nop>" } }) -- disable backgrounding when <C-z> is pressed
   :apply ()
 
+require ("znv.kalika").setup ({ transparent = true })
+
 vim.api.nvim_cmd ({ cmd = "colorscheme", args = { "kalika" } }, {})
 
-local toggles = require ("nvstp.toggle")
+local toggles = require ("znv.toggle")
 
 toggles.add (
   "diagnostic-lines",
@@ -55,10 +57,10 @@ toggles.add ("inlay-hints", function (s) vim.lsp.inlay_hint.enable (s) end, true
 toggles.add ("spell-check", function (s) vim.opt.spell = s end, false)
 toggles.add ("mouse-support", function (s) vim.opt.mouse = s and "a" or "" end, true)
 
-require ("nvstp.hotrel").setup ()
-require ("nvstp.term").setup ()
-require ("nvstp.palette.whichkey").setup ().map ("<leader>")
-require ("nvstp.statusline").set ({
+require ("znv.hotrel").setup ()
+require ("znv.term").setup ()
+require ("znv.palette.whichkey").setup ().map ("<leader>")
+require ("znv.statusline").set ({
   ignore = "neo-tree,Outline,toggleterm",
   bar = {
     "mode",

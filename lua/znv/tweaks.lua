@@ -19,7 +19,7 @@ main.tweaks = {
     end
 
     -- Set indentation based on guesses, works better btw
-    vim.api.nvim_create_user_command ("NvstpIndentSet", function (opts)
+    vim.api.nvim_create_user_command ("ZnvIndentSet", function (opts)
       local width = tonumber (opts.fargs[1])
       assert (width ~= nil, "number is nil")
       assert (width % 2 == 0, "number is not a even number")
@@ -106,7 +106,7 @@ main.tweaks = {
 }
 
 function main.apply ()
-  for n, v in pairs (NVSTP.tweaks) do
+  for n, v in pairs (ZNV.tweaks) do
     if v == true and main.tweaks[n] ~= nil then main.tweaks[n] () end
   end
 end

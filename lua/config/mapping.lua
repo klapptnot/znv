@@ -4,10 +4,10 @@ local __map__ = require ("config.data.mapping")
 local main = {}
 
 --- Return a new instance of mapping table
---- @param tbl? NvstpKeyMap[]
+--- @param tbl? ZnvKeyMap[]
 --- @return NvimMappingConfig
 function main:new (tbl)
-  --- @type NvstpKeyMap[]
+  --- @type ZnvKeyMap[]
   self = tbl or __map__
   setmetatable (self, { __index = main })
   return self
@@ -63,7 +63,7 @@ function main:disable_mouse ()
 end
 
 --- Add one keybinding to the table
---- @param props NvstpKeyMap
+--- @param props ZnvKeyMap
 --- @return NvimMappingConfig
 function main:add (props)
   self[#self+1] = props
@@ -76,7 +76,7 @@ function main:apply ()
   local fmt = string.format
 
   for _, props in pairs (self) do
-    --- @cast props NvstpKeyMap
+    --- @cast props ZnvKeyMap
     if type (props.exec) == "function" then
       --- @diagnostic disable-next-line: assign-type-mismatch
       props.opts.callback = props.exec

@@ -310,7 +310,7 @@ return {
     "rcarriga/nvim-notify",
     name = "notify",
     init = function ()
-      if NVSTP.less_complex_things == false then
+      if ZNV.less_complex_things == false then
         -- Just to ignore notification
         require ("notify").setup ({ background_colour = "#000000" })
         vim.notify = require ("notify")

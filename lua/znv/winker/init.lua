@@ -1,6 +1,6 @@
--- nvstp winker (window picker)
+-- znv winker (window picker)
 
-local fl = require ("nvstp.winker.font")
+local fl = require ("znv.winker.font")
 local utf8 = require ("warm.utf8")
 
 local drawer = {

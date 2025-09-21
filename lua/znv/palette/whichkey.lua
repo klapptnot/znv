@@ -1,4 +1,4 @@
-local core = require ("nvstp.palette.core")
+local core = require ("znv.palette.core")
 local str = require ("warm.str")
 local tbl = require ("warm.table")
 
@@ -139,8 +139,8 @@ end
 local function whichkey ()
   local mapps = get_mapps ()
   if tbl.is_empty (mapps) then return end
-  local ns = vim.api.nvim_create_namespace ("nvstp-palette-whichkey")
-  local fuzzs_ns = vim.api.nvim_create_namespace ("nvstp-palette-whichkey-fuzzs")
+  local ns = vim.api.nvim_create_namespace ("znv-palette-whichkey")
+  local fuzzs_ns = vim.api.nvim_create_namespace ("znv-palette-whichkey-fuzzs")
   local em_fmt = "{}/" .. #tbl.get_keys (mapps)
 
   local close_palette, props = core.open ({ title = main.opts.title })

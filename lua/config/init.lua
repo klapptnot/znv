@@ -1,8 +1,8 @@
 -- config loader
 
---- @alias NvstpConfig {mapping:NvimMappingConfig; options:NvimOptionsConfig; plugins:NvimPluginsConfig}
+--- @alias ZnvConfig {mapping:NvimMappingConfig; options:NvimOptionsConfig; plugins:NvimPluginsConfig}
 
---- @type NvstpConfig
+--- @type ZnvConfig
 local main = {
   --- @return NvimMappingConfig
   mapping = require ("config.mapping"):new (),

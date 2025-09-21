@@ -40,4 +40,4 @@
 -- List of item schemes
 --- @alias ListScheme {[AnyIndex]:ItemScheme, type_err:ArgErrMsg?, value_err:ArgErrMsg?, sep:string?}
 
---- @alias NvstpKeyMap {mapp:string, mode:string[], exec:fun()|string, desc:string?, opts:vim.api.keyset.keymap?}
+--- @alias ZnvKeyMap {mapp:string, mode:string[], exec:fun()|string, desc:string?, opts:vim.api.keyset.keymap?}
