@@ -1,7 +1,9 @@
 local main = {}
 
 function main.lspconfig ()
-  local lspconfig = require ("lspconfig")
+  ---@type fun(string, table)
+  ---@diagnostic disable-next-line: assign-type-mismatch
+  local lspconfig = vim.lsp.config
   local fns_on_attach = function (client, bufnr)
     local mapps = require ("config.data.lspmapps")
 
@@ -28,24 +30,22 @@ function main.lspconfig ()
     capabilities = fns_capabilities,
   }
 
-  lspconfig.rust_analyzer.setup (shared_opts)
-  lspconfig.zls.setup (shared_opts)
-  lspconfig.clangd.setup (shared_opts)
-  lspconfig.pyright.setup (shared_opts)
-  lspconfig.nushell.setup (shared_opts)
-  lspconfig.ts_ls.setup (shared_opts)
-  lspconfig.bashls.setup (shared_opts)
-  lspconfig.html.setup (shared_opts)
-  lspconfig.lua_ls.setup ({
+  lspconfig ("rust_analyzer", shared_opts)
+  lspconfig ("zls", shared_opts)
+  lspconfig ("clangd", shared_opts)
+  lspconfig ("pyright", shared_opts)
+  lspconfig ("pyrefly", shared_opts)
+  lspconfig ("nushell", shared_opts)
+  lspconfig ("ts_ls", shared_opts)
+  lspconfig ("bashls", shared_opts)
+  lspconfig ("html", shared_opts)
+  lspconfig ("lua_ls", {
     on_attach = fns_on_attach,
     capabilities = fns_capabilities,
     settings = {
       Lua = {
         hints = {
           enable = true,
-        },
-        diagnostics = {
-          globals = { "vim" },
         },
         workspace = {
           library = {
@@ -59,7 +59,7 @@ function main.lspconfig ()
       },
     },
   })
-  -- lspconfig.jsonls.setup({
+  -- lspconfig("jsonls", {
   --   hints = {
   --     enable = true,
   --   },

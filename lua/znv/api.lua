@@ -158,7 +158,7 @@ function main.find_and_open_refs (deep)
 
       local windows = api.nvim_list_wins ()
       if #windows > 1 then
-        local selected_win = require ("nvstp.winker.init").select ()
+        local selected_win = require ("znv.winker.init").select ()
         if selected_win and api.nvim_win_is_valid (selected_win.data.winid) then
           win = selected_win.data.winid
         else
@@ -250,7 +250,7 @@ function main.jump_buf_by_ref (ref)
   end
 
   if #vim.api.nvim_list_wins () > 1 then
-    local selected_win = require ("nvstp.winker.init").select ()
+    local selected_win = require ("znv.winker.init").select ()
     if selected_win == nil then
       vim.notify ("Invalid selection, try again", vim.log.levels.ERROR, {})
       return false
@@ -544,11 +544,11 @@ function main.redo ()
   vim.api.nvim_command ("redo")
 end
 
-function main.toggle_vterm () require ("nvstp.term").toggle ("vertical", true) end
+function main.toggle_vterm () require ("znv.term").toggle ("vertical", true) end
 
-function main.toggle_hterm () require ("nvstp.term").toggle ("horizontal", true) end
+function main.toggle_hterm () require ("znv.term").toggle ("horizontal", true) end
 
-function main.toggle_fterm () require ("nvstp.term").toggle ("floating", true) end
+function main.toggle_fterm () require ("znv.term").toggle ("floating", true) end
 
 function main.tab_new () main.pnvim_command ("tabnew") end
 
@@ -569,10 +569,10 @@ end
 
 -- Wincker
 
-function main.win_jump () require ("nvstp.winker.init").jump () end
+function main.win_jump () require ("znv.winker.init").jump () end
 
 function main.win_close ()
-  local res = require ("nvstp.winker.init").select ()
+  local res = require ("znv.winker.init").select ()
   if res == nil then
     vim.notify ("Could not get selected window", vim.log.levels.ERROR, {})
     return

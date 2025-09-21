@@ -45,7 +45,7 @@ local vim_modes = {
   ["x"] = { "CONFIRM", "prompt" },
   ["!"] = { "SHELL", "prompt" },
 
-  ["sp"] = { "NVSTP", "other" },
+  ["sp"] = { "ZNV", "other" },
 }
 
 local main = {}
@@ -177,7 +177,7 @@ function main.run ()
   local sep = main.separators.l
 
   local function color_and_unions_r (last, curr, id)
-    local hg_name = "NvstpSL" .. id
+    local hg_name = "ZnvSL" .. id
 
     if curr == nil then
       if last == nil then return "" end
@@ -192,7 +192,7 @@ function main.run ()
   end
 
   local function color_and_unions_l (last, curr, id)
-    local hg_name = "NvstpSL" .. id
+    local hg_name = "ZnvSL" .. id
 
     if curr == nil then
       if last == nil then return "" end
@@ -257,7 +257,7 @@ function main.set (opts, enable)
   StatusLineGenerate = main.run
 
   main.__enabled = not enable
-  vim.api.nvim_create_user_command ("NvstpSLToggle", function ()
+  vim.api.nvim_create_user_command ("ZnvSLToggle", function ()
     if main.__enabled then
       vim.opt.statusline = ""
       main.__enabled = false
@@ -266,7 +266,7 @@ function main.set (opts, enable)
       main.__enabled = true
     end
   end, {})
-  vim.api.nvim_command ("NvstpSLToggle")
+  vim.api.nvim_command ("ZnvSLToggle")
 end
 
 return main

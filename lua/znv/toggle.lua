@@ -85,8 +85,8 @@ function main.list ()
 end
 
 -- Create the user command
-vim.api.nvim_create_user_command ("NvstpToggle", function (opts)
-  local notify_params = { title = "Nvstp Toggle" }
+vim.api.nvim_create_user_command ("ZnvToggle", function (opts)
+  local notify_params = { title = "Znv Toggle" }
   local arg1 = opts.fargs[1]
 
   if arg1 == "--list" or arg1 == "-l" then

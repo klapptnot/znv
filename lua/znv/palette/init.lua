@@ -1,7 +1,7 @@
 local builtins = {
-  whichkey = "src.nvstp.palette.builtin.whichkey",
-  lsp_symbols = "src.nvstp.palette.builtin.lsp_symbols",
-  -- git = "src.nvstp.palette.builtin.git",
+  whichkey = "src.znv.palette.builtin.whichkey",
+  lsp_symbols = "src.znv.palette.builtin.lsp_symbols",
+  -- git = "src.znv.palette.builtin.git",
 }
 
 --- @type table<string, fun(...)>

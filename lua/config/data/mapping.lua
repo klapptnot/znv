@@ -1,4 +1,4 @@
-local api = require ("nvstp.api")
+local api = require ("znv.api")
 
 local function toggle_or_refs (toggle_fun, lay)
   return function ()
@@ -11,7 +11,7 @@ local function toggle_or_refs (toggle_fun, lay)
     end
 
     -- Get the current terminal instance info
-    local term_api = require ("nvstp.term")
+    local term_api = require ("znv.term")
     local current_instance = nil
     for _, instance in pairs (term_api.instances) do
       if instance.buf == buf then
@@ -34,7 +34,7 @@ local _opts_lua = { expr = false, noremap = false }
 --- @type vim.api.keyset.keymap
 local _opts_map = { expr = false, silent = true }
 
---- @type NvstpKeyMap[]
+--- @type ZnvKeyMap[]
 return {
   -- ^ Lua functions
   {
