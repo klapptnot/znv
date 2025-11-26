@@ -432,8 +432,9 @@ function main.quit ()
     if choice == 2 then vim.cmd ("qa!") end
   else
     -- File is modified, but no name assigned, prompt to cancel or force quit
-    local choice = vim.fn.confirm ("Changes will be lost, quit anyways?", "&Yes\n&No", 2)
-    if choice == 1 then vim.cmd ("qa!") end
+    -- local choice = vim.fn.confirm ("Changes will be lost, quit anyways?", "&Yes\n&No", 2)
+    -- if choice == 1 then vim.cmd ("qa!") end
+    vim.cmd ("qa!")
   end
 end
 
