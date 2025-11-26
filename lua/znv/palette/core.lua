@@ -32,13 +32,13 @@ function main.resizeh (display, new_height)
 end
 
 -- Open display + input window
---- @param opts {title:string?}
+--- @param opts {title:string?, wh:integer?, ww:integer?}
 --- @return function? close_fn, PaletteProps? props
 function main.open (opts)
   opts = opts or {}
-  opts = {
-    title = opts.title or " Select ",
-  }
+  local win_title = opts.title or " Select "
+  local win_height = opts.wh
+  local win_width = opts.ww
   local ui = vim.api.nvim_list_uis ()[1]
   if not ui then return end
 
@@ -49,10 +49,16 @@ function main.open (opts)
     pos = vim.api.nvim_win_get_cursor (0),
   }
 
-  local display_height = math.floor (ui.height / 2) - 5
-  local width = math.floor (ui.width / 4)
+  if win_height == nil then
+    win_height = math.floor (ui.height / 2) - 5
+  end
+  if win_width == nil then
+    win_width = math.floor (ui.width / 4)
+  elseif ui.width < win_width - 2 then
+    error("Window width is smaller than required")
+  end
   local input_height = 1
-  local total_height = display_height + input_height
+  local total_height = win_height + input_height
 
   local row = ui.height - total_height - 5
   local col = 0
@@ -67,10 +73,10 @@ function main.open (opts)
 
   local display_win = vim.api.nvim_open_win (display_buf, false, {
     relative = "editor",
-    title = opts.title,
+    title = win_title,
     title_pos = "center",
-    width = width,
-    height = display_height,
+    width = win_width,
+    height = win_height,
     row = row,
     col = col,
     style = "minimal",
@@ -97,9 +103,9 @@ function main.open (opts)
 
   local input_win = vim.api.nvim_open_win (input_buf, true, {
     relative = "editor",
-    width = width,
+    width = win_width,
     height = input_height,
-    row = row + display_height + 5,
+    row = row + win_height + 5,
     col = col,
     style = "minimal",
     border = "rounded",
@@ -109,23 +115,23 @@ function main.open (opts)
     display = {
       buf = display_buf,
       win = display_win,
-      cur_h = display_height,
-      cur_w = width,
-      max_h = display_height,
-      max_w = width,
+      cur_h = win_height,
+      cur_w = win_width,
+      max_h = win_height,
+      max_w = win_width,
       row = row,
     },
     input = {
       buf = input_buf,
       win = input_win,
       cur_h = input_height,
-      cur_w = width,
+      cur_w = win_width,
       max_h = input_height,
-      max_w = width,
-      row = row + display_height + 5,
+      max_w = win_width,
+      row = row + win_height + 5,
     },
     state = state,
-    width = width,
+    width = win_width,
     col = col,
     open = true,
   }

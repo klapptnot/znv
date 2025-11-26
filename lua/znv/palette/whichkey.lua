@@ -143,7 +143,7 @@ local function whichkey ()
   local fuzzs_ns = vim.api.nvim_create_namespace ("znv-palette-whichkey-fuzzs")
   local em_fmt = "{}/" .. #tbl.get_keys (mapps)
 
-  local close_palette, props = core.open ({ title = main.opts.title })
+  local close_palette, props = core.open ({ title = main.opts.title, ww = 65 })
 
   if props == nil then
     vim.notify ("Could not open a new palette", vim.log.levels.ERROR, { "Whichkey" })

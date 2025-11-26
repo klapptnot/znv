@@ -62,7 +62,7 @@ function main.new (layout)
   vim.api.nvim_set_option_value ("buflisted", false, { buf = buf }) -- Set as unlisted/hidden
   vim.api.nvim_win_set_buf (win, buf) -- Attach the buffer to window
 
-  local shell = main.opts.shell or vim.o.shell
+  local shell = main.opts.shell or vim.env.SHELL
   local job = vim.fn.jobstart (shell, { term = true })
 
   local instance_key = "inst_" .. tostring (main.total)
