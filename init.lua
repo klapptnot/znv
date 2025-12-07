@@ -36,7 +36,6 @@ require ("znv.tweaks").apply ()
 local config = require ("config")
 
 config.plugins:apply ()
-config.options:apply ()
 config
   .mapping
   :map ({ { "<C-z>", "<nop>" } }) -- disable backgrounding when <C-z> is pressed
