@@ -22,6 +22,11 @@ return {
   },
 
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {},
+  },
+
+  {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
   },

@@ -176,7 +176,7 @@ function main.run ()
   env.skip = false
   local sep = main.separators.l
 
-  local function color_and_unions_r (last, curr, id)
+  local function color_and_unions_left (last, curr, id)
     local hg_name = "ZnvSL" .. id
 
     if curr == nil then
@@ -191,7 +191,7 @@ function main.run ()
     return "%#" .. hg_name .. "S#" .. sep .. "%#" .. hg_name .. "# "
   end
 
-  local function color_and_unions_l (last, curr, id)
+  local function color_and_unions_right (last, curr, id)
     local hg_name = "ZnvSL" .. id
 
     if curr == nil then
@@ -206,7 +206,7 @@ function main.run ()
     return " %#" .. hg_name .. "S#" .. sep .. "%#" .. hg_name .. "#"
   end
 
-  local color_and_unions = color_and_unions_r
+  local color_and_unions = color_and_unions_left
 
   --- @type string|table
   local bar = {}
@@ -240,7 +240,7 @@ function main.run ()
         if env.swap then
           last_hg = {}
           sep = main.separators.r
-          color_and_unions = color_and_unions_l
+          color_and_unions = color_and_unions_right
           env.swap = false
         end
       end
