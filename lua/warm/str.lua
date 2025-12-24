@@ -77,8 +77,7 @@ end
 --- @param fallback string
 --- @return string
 function main.fallback (s, fallback)
-  local cond = (type (s) == "string" and #s > 0)
-  if cond then return s end
+  if (type (s) == "string" and #s > 0) then return s end
   return fallback
 end
 

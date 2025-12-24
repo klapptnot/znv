@@ -379,7 +379,7 @@ local function whichkey ()
   set_window_style ("NWhichKeyPrefix")
 
   vim.api.nvim_win_call (props.display.win, function ()
-    vim.fn.matchadd ("NWhichKeyTags", "\\[[^\\]]*\\]")
+    vim.fn.matchadd ("NWhichKeyTags", "\\[[^\\[]*\\]")
     vim.fn.matchadd ("NWhichKeyChar", "[➜|]")
   end)
 

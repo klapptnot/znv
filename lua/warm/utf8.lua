@@ -150,15 +150,22 @@ end
 --- @return number
 --- @return number
 local function make_slice_positions (l, i, j)
-  -- Set the right amount to cut
   if i == nil then i = 1 end
 
-  -- Accept i negative number
+  -- accept i negative number
   if i == -1 then i = l end
   if i < 0 then i = l + i + 1 end
-  -- Accept j negative number
+  -- follow string.sub() behavior
+  if i <= 0 then i = 1 end
+  -- accept j negative number
   if j == nil or j == -1 then j = l end
   if j < 0 then j = l + j + 1 end
+  -- prevent dead coroutine call
+  if j > l then j = l end
+  -- `i > 0` will always be true
+  -- i > j or j < 0 results in "" in str.sub
+  -- not handling allows early return
+  -- (i > j) -> return ""
   return i, j
 end
 

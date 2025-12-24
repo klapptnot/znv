@@ -55,7 +55,7 @@ function main.open (opts)
   if win_width == nil then
     win_width = math.floor (ui.width / 4)
   elseif ui.width < win_width - 2 then
-    error("Window width is smaller than required")
+    error ("Window width is smaller than required")
   end
   local input_height = 1
   local total_height = win_height + input_height
