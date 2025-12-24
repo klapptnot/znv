@@ -9,5 +9,4 @@
 -- This is the Kalika color scheme. It defines peaceful, vibrant colors to
 -- bring you balance and clarity while coding.
 
-require("znv.kalika").load()
-
+require ("znv.kalika").load ()
