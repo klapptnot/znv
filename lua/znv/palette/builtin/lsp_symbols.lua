@@ -21,8 +21,8 @@ local function get_document_symbols (opts)
 
             lines[#lines+1] = str.format (
               "{: =<60} ➜ {}",
-              tostring (line) .. ":" .. tostring (col),
-              item.name
+              item.name,
+              tostring (line) .. ":" .. tostring (col)
             )
             table.insert (pos, {
               line + 1,
@@ -38,8 +38,8 @@ local function get_document_symbols (opts)
 
             lines[#lines+1] = str.format (
               "{: =<60} ➜ {}",
-              tostring (line) .. ":" .. tostring (col),
-              item.name
+              item.name,
+              tostring (line) .. ":" .. tostring (col)
             )
             table.insert (pos, {
               line + 1,
