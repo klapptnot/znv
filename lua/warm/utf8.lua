@@ -394,16 +394,21 @@ function main.sub (s, i, j)
   i, j = make_slice_positions (l, i, j)
 
   if l == 0 or i > j then return "" end
-  local pop_char = coroutine.wrap (function () main.map (s, coroutine.yield) end)
 
-  -- stylua: ignore
-  for _ = 1, i - 1 do pop_char () end
-  local res = ""
-  for _ = 1, j - i + 1 do
-    local _, c = pop_char ()
-    res = res .. c
+  local pos, start_byte, end_byte = 0, nil, nil
+  local byte_pos = 1
+
+  for chr in string.gmatch (s, charset) do
+    pos = pos + 1
+    if pos == i then start_byte = byte_pos end
+    if pos == j then
+      end_byte = byte_pos + #chr - 1
+      break
+    end
+    byte_pos = byte_pos + #chr
   end
-  return res
+
+  return s:sub (start_byte or 1, end_byte or #s)
 end
 
 --- Wrapper around string.find, it works anyways

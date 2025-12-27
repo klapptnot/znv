@@ -1,6 +1,7 @@
 -- String manipulation utils
 
 local spr = require ("warm.spr")
+local utf8 = require ("warm.utf8")
 local main = {}
 
 --- Remove trailing and leading spaces/linebreaks
@@ -41,8 +42,8 @@ end
 --- Escape lua magic characters, making a pattern match themselves
 -- ```lua
 -- local s, r = "This is concat operator: `..`", nil
--- r = string.match(s, str.pesc('..'))) -- r == "Th"
--- r = (string.match(s, '..') -- r == ".."
+-- r = string.match(s, str.pesc('..'))) -- r == ".."
+-- r = (string.match(s, '..') -- r == "Th"
 -- ```
 --- @param p string
 --- @return string
@@ -157,10 +158,11 @@ end
 function main.pad (s, n, fill, algn)
   s = main.fallback (s, "")
   n = tonumber (n) - 0
-  if #s >= n then return s end
+  local l = utf8.len (s)
+  if l >= n then return s end
   algn = main.fallback (algn, "<")
   fill = main.fallback (tostring (fill), " ")
-  fill = fill:rep (n):sub (1, n - #s)
+  fill = fill:rep (n):sub (1, n - l)
 
   if algn == "<" then
     s = s .. fill
@@ -178,7 +180,7 @@ end
 --
 -- ```lua
 -- str.format("{} version {}.", "soil", 1.0) -- "soil version 1.0"
--- str.format("From: {:<8}| At: {8:>}|", "source", "path") -- "From: source  | At:     path|"
+-- str.format("From: {:<8}| At: {:>8}|", "source", "path") -- "From: source  | At:     path|"
 -- str.format("Var: {:_^20}.", "APP_VERSION") -- "Var: _____APP_VERSION____."
 -- str.format("Grab: {:10}.", "none") -- "Grab:       none."
 -- str.format("[3: {3}, 1: {}, 4: {4}, 2: {}]", "one", "two", "three", "four") -- [3: three, 1: one, 4: four, 2: two]
@@ -190,42 +192,44 @@ function main.format (s, ...)
   local args = { ... }
   local i = 1
 
-  local function index_in ()
-    local idx = i
+  local function index_in (ign)
+    if ign == "\\" then return "{}" end
     i = i + 1
-    return args[idx]
+    return args[i - 1]
   end
 
-  local function replacement (match)
-    if match == "" then
-      i = i + 1
-      return tostring (args[i - 1]) or ""
-    end
-    -- stylua: ignore start
-    local width = tonumber (match:match ("(%d+)$")) or 0 -- Width
-    local pad = match:match ("([<^>]?)%d+$") or "<" -- Pad opr
-    local cut = match:match (":.?(=)[<^>]?%d+$") ~= nil -- Cut longer
-    local char = match:match (":(.)=?[<^>]%d+$") or " " -- Fill char
-    local id = tonumber (match:match ("^(%d*)")) -- String id
-    -- stylua: ignore end
+  local function replacement (ign, id, match)
+    if ign == "\\" then return "{" .. id .. match .. "}" end
+    id = tonumber (id)
     if id == nil then
       id = i
       i = i + 1
     end
-    match = tostring (args[id]) -- :gsub("^ *(.-) *$", "%1")
+
+    if match == "" then return args[id] end
+    local width = tonumber (match:match ("(%d+)$")) or 0 -- Width
+    local pad = match:match ("([<^>]?)%d+$") or "<" -- Pad opr
+    local cut = match:match (":.?(=)[<^>]?%d+$") ~= nil -- Cut longer
+    local char = match:match (":(.?)=?[<^>]%d+$") or " " -- Fill char
+
+    match = tostring (args[id])
     -- In case string is wider than desired, cut it
-    if cut and #match > width then
-      match = match:sub (1, width - 1) .. "…"
+    local length = utf8.len (match)
+    if cut and length > width then
+      -- match = utf8.sub (match, 1, width) .. "…"
+      if #match == length then -- byte length == char length = pure ASCII
+        match = match:sub (1, width - 1) .. "…"
+      else
+        match = utf8.sub (match, 1, width - 1) .. "…"
+      end
     else
       match = main.pad (match, width, char, pad)
     end
     return match
   end
 
-  s = s:gsub ("{{(.-)}}", "&!:%1::;")
-    :gsub ("{}", index_in)
-    :gsub ("{(%d*:.?=?[=<^>]?%d*)}", replacement)
-    :gsub ("&!:(.-)::;", "{%1}")
+  s = string.gsub (s, "(\\?){(%d*)(:.?=?[=<^>]?%d*)}", replacement)
+    :gsub ("(\\?){}", index_in)
   return s
 end
 
