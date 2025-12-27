@@ -90,7 +90,7 @@ end
 local function make_results_pref (mapps, pref, width)
   local lines = {}
   local keys = {}
-  local fmt = "{1: =>2} | {2: =<11} ➜ {3: =<" .. width - 19 .. "}"
+  local fmt = "{: =>2} | {: =<11} ➜ {: =<" .. width - 20 .. "}"
   for n, v in pairs (mapps) do
     if str.starts_with (n, pref) then
       lines[#lines+1] =
@@ -104,7 +104,7 @@ end
 local function make_results_fuzz (mapps, fuzz, width)
   local lines = {}
   local keys = {}
-  local fmt = "{1: =<" .. width - 19 .. "} ➜ {2: =<11} | {3: =>2}"
+  local fmt = "{: =<" .. width - 20 .. "} ➜ {: =<11} | {: =>2}"
   for n, v in pairs (mapps) do
     if str.fuzzy (v.desc, fuzz) then
       lines[#lines+1] = str.format (fmt, v.desc, n, v.mode .. (v.buffer == 1 and "-" or "+"))
