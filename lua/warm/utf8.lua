@@ -249,7 +249,7 @@ function main.map (s, fun, init)
   local rtb = {}
   for chr in s:gmatch (charset, init) do
     pos = pos + 1
-    rtb[#rtb+1] = table.pack (fun (pos, chr))
+    rtb[#rtb+1] = { fun (pos, chr) }
   end
   return rtb
 end

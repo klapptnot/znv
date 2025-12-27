@@ -51,8 +51,7 @@ function main.funwrap (fn, ...)
   assert (type (fn) == "function", "argument #1 to 'funwrap' must be a function")
   local perm_args = { ... }
   return function (...)
-    local gen_args = table.pack (table.unpack (perm_args), ...)
-    return fn (table.unpack (gen_args))
+    return fn (table.unpack (perm_args), ...)
   end
 end
 
