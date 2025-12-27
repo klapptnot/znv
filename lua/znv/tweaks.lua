@@ -58,19 +58,6 @@ main.tweaks = {
     -- !! making forward compatibility easy (When available, remove this)
     table.unpack = unpack
 
-    --- Returns a new table with all arguments stored into keys `1`, `2`, etc. and with a field `"n"` with the total number of arguments.
-    ---
-    --- [View documents](http://www.lua.org/manual/5.4/manual.html#pdf-table.pack)
-    ---
-    --- @return table
-    --- @nodiscard
-    table.pack = table.pack
-      or function (...)
-        local t = { ... }
-        rawset (t, "n", #t)
-        return t
-      end
-
     -- Simple check if string contains other string inside
     -- Patterns are matched as plain string
     -- ```lua
