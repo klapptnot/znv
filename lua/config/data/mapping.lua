@@ -167,7 +167,7 @@ return {
 
   {
     mapp = "<C-z>",
-    mode = { "n", "v", "i" },
+    mode = { "i" },
     exec = vim.cmd.undo,
     desc = "Undo",
     opts = _opts_lua,

@@ -38,8 +38,8 @@ local config = require ("config")
 config.plugins:apply ()
 config
   .mapping
-  :map ({ { "<C-z>", "<nop>" } }) -- disable backgrounding when <C-z> is pressed
   :apply ()
+  -- :map ({ { "<C-z>", "<nop>" } }) -- disable backgrounding when <C-z> is pressed
 
 require ("znv.kalika").setup ({ transparent = true })
 
