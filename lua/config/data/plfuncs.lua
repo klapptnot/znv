@@ -33,7 +33,6 @@ function main.lspconfig ()
   local servers = {
     "rust_analyzer",
     "zls",
-    "clangd",
     "pyright",
     "pyrefly",
     "nushell",
@@ -46,6 +45,26 @@ function main.lspconfig ()
     lspconfig (lsp, shared_opts)
     vim.lsp.enable (lsp)
   end
+
+  -- clangd with C23 support
+  lspconfig ("clangd", {
+    on_attach = fns_on_attach,
+    capabilities = fns_capabilities,
+    cmd = {
+      "clangd",
+      "--background-index",
+      "--clang-tidy",
+      "--header-insertion=iwyu",
+      "--completion-style=detailed",
+      "--function-arg-placeholders",
+      "--fallback-style=google",
+    },
+    init_options = {
+      compilationDatabasePath = "build",
+      fallbackFlags = { "-std=c23" },
+    },
+  })
+  vim.lsp.enable ("clangd")
 
   lspconfig ("lua_ls", {
     on_attach = fns_on_attach,
