@@ -700,9 +700,11 @@ function main.add_indent ()
       -- Iterate over the lines and add indentation
       local lines = vim.api.nvim_buf_get_lines (0, line_start - 1, line_end, false)
       for i, line in pairs (lines) do
-        local ln = line_start + (i - 1)
-        local new_line = indent_str .. line -- Add the appropriate indentation
-        vim.api.nvim_buf_set_lines (0, ln - 1, ln, false, { new_line })
+        if #str.strip (line) > 0 then
+          local ln = line_start + (i - 1)
+          local new_line = indent_str .. line -- Add the appropriate indentation
+          vim.api.nvim_buf_set_lines (0, ln - 1, ln, false, { new_line })
+        end
       end
     end)
   end
