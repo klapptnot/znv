@@ -74,7 +74,7 @@ end
 --- Check for possible refs in current buffer, and open selected one
 --- @param deep? boolean Whether to check all colon-followed strings
 function main.find_and_open_refs (deep)
-  local pattern = "([%w%p]+%.%w+):?(%d*):?(%d*)"
+  local pattern = "([%w%p]+):?(%d*):?(%d*)"
   if deep == true then pattern = "([%w%p]+):(%d*):?(%d*)" end
   local api = vim.api
   local fn = vim.fn

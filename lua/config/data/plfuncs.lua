@@ -87,16 +87,16 @@ function main.lspconfig ()
     },
   })
   vim.lsp.enable ("lua_ls")
-  -- lspconfig("jsonls", {
-  --   hints = {
-  --     enable = true,
-  --   },
-  --   on_attach = fns_on_attach,
-  --   capabilities = fns_capabilities,
-  --   settings = {
-  --     schemas = require("config.data.jsonsch"),
-  --   },
-  -- })
+  lspconfig("jsonls", {
+    hints = {
+      enable = true,
+    },
+    on_attach = fns_on_attach,
+    capabilities = fns_capabilities,
+    settings = {
+      schemas = require("config.data.jsonsch"),
+    },
+  })
 end
 
 function main.tabby ()
