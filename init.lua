@@ -1,15 +1,30 @@
+vim.opt.cmdheight = 1 -- nvim_echo won't appear too high up
 do -- bootstrap
   local lazypath = vim.fs.joinpath (vim.fn.stdpath ("data"), "lazy", "lazy.nvim")
   --- @diagnostic disable-next-line: undefined-field
   if not vim.uv.fs_stat (lazypath) then
-    vim.fn.system ({
+    vim.api.nvim_echo ({
+      { "⚡ Bootstrapping ", "WarningMsg" },
+      { "lazy.nvim", "Title" },
+      { "...\n", "Normal" },
+    }, true, {})
+
+    local out = vim.fn.system ({
       "git",
       "clone",
       "--filter=blob:none",
       "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable", -- latest stable release
+      "--branch=stable",
       lazypath,
     })
+
+    if vim.v.shell_error ~= 0 then
+      vim.api.nvim_echo ({
+        { "✗ Bootstrap failed:\n", "ErrorMsg" },
+        { out, "Normal" },
+      }, true, {})
+      return
+    end
   end
 
   vim.opt.rtp:prepend (lazypath)
@@ -39,7 +54,7 @@ config.plugins:apply ()
 config
   .mapping
   :apply ()
-  -- :map ({ { "<C-z>", "<nop>" } }) -- disable backgrounding when <C-z> is pressed
+-- :map ({ { "<C-z>", "<nop>" } }) -- disable backgrounding when <C-z> is pressed
 
 require ("znv.kalika").setup ({ transparent = true })
 

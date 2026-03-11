@@ -57,7 +57,7 @@ return {
     mapp = "th",
     mode = { "n", "v" },
     exec = api.tab_prev,
-    desc = "Go to prev tab/buffer",
+    desc = "Go to prev tab",
     opts = _opts_lua,
   },
 
@@ -65,7 +65,7 @@ return {
     mapp = "tl",
     mode = { "n", "v" },
     exec = api.tab_next,
-    desc = "Go to next tab/buffer",
+    desc = "Go to next tab",
     opts = _opts_lua,
   },
 
@@ -73,7 +73,7 @@ return {
     mapp = "tk",
     mode = { "n", "v" },
     exec = api.tab_new,
-    desc = "Add a new tab/buffer",
+    desc = "Add a new tab",
     opts = _opts_lua,
   },
 
@@ -89,7 +89,7 @@ return {
     mapp = "tr",
     mode = { "n", "v" },
     exec = api.tab_rename,
-    desc = "Rename current tab/buffer",
+    desc = "Rename current tab",
     opts = _opts_lua,
   },
 
@@ -422,24 +422,38 @@ return {
   },
 
   {
-    mapp = "<leader>bn",
+    mapp = "bn",
     mode = { "n" },
     exec = "<Cmd>bnext<CR>",
     desc = "Buffer: go to next",
     opts = _opts_map,
   },
   {
-    mapp = "<leader>bp",
+    mapp = "bp",
     mode = { "n" },
     exec = "<Cmd>bprevious<CR>",
     desc = "Buffer: go to previous",
     opts = _opts_map,
   },
   {
-    mapp = "<leader>bd",
+    mapp = "bd",
     mode = { "n" },
     exec = "<Cmd>bd<CR>",
     desc = "Buffer: delete current",
+    opts = _opts_map,
+  },
+  {
+    mapp = "f[",
+    mode = { "v", "n" },
+    exec = "<Cmd>foldopen<CR>",
+    desc = "Open fold section",
+    opts = _opts_map,
+  },
+  {
+    mapp = "f]",
+    mode = { "v", "n" },
+    exec = "<Cmd>foldclose<CR>",
+    desc = "Close fold section",
     opts = _opts_map,
   },
 

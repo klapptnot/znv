@@ -61,7 +61,6 @@ function main.lspconfig ()
     },
     init_options = {
       compilationDatabasePath = "build",
-      fallbackFlags = { "-std=c23" },
     },
   })
   vim.lsp.enable ("clangd")
@@ -87,14 +86,14 @@ function main.lspconfig ()
     },
   })
   vim.lsp.enable ("lua_ls")
-  lspconfig("jsonls", {
+  lspconfig ("jsonls", {
     hints = {
       enable = true,
     },
     on_attach = fns_on_attach,
     capabilities = fns_capabilities,
     settings = {
-      schemas = require("config.data.jsonsch"),
+      schemas = require ("config.data.jsonsch"),
     },
   })
 end
@@ -405,26 +404,39 @@ function main.null_ls ()
 end
 
 function main.treesitter ()
-  local configs = require ("nvim-treesitter.configs")
-  configs.setup ({
-    ensure_installed = {
-      "c",
-      "lua",
-      "vim",
-      "vimdoc",
-      "rust",
-      "python",
-      "bash",
-      "javascript",
-      "fish",
-      "json5",
-      "yaml",
-      "java",
-    },
-    sync_install = true,
-    auto_install = true,
-    highlight = { enable = true },
-    indent = { enable = true },
+  local ts = require ("nvim-treesitter")
+
+  ts.install ({
+    "nu",
+    "vimdoc",
+    "rust",
+    "python",
+    "bash",
+    "javascript",
+    "lua",
+    "json5",
+    "c",
+    "java",
+    "zig",
+    "fish",
+    "vim",
+    "jsx",
+    "ecma",
+    "typescript",
+    "yaml",
+  })
+
+  local nv_indentexpr = vim.bo.indentexpr
+  vim.api.nvim_create_autocmd ("FileType", {
+    callback = function (args)
+      local ok, parser = pcall (vim.treesitter.get_parser, args.buf)
+      if ok and parser ~= nil then
+        ok = pcall (vim.treesitter.start, args.buf, parser:lang())
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      else
+        vim.o.indentexpr = nv_indentexpr
+      end
+    end,
   })
 end
 

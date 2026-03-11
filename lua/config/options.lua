@@ -74,9 +74,10 @@ opt.smartcase = true
 
 -- persistent undo history
 opt.undofile = true
+opt.termguicolors = true
 
 -- always show tabline
-opt.showtabline = 2
+opt.showtabline = 1
 -- minimal command area height
 opt.cmdheight = 1
 

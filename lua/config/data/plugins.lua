@@ -4,6 +4,13 @@ return {
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
   {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = funcs.treesitter,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
     opts = {},
@@ -159,12 +166,6 @@ return {
     "nanozuki/tabby.nvim",
     event = "VimEnter",
     config = funcs.tabby,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = funcs.treesitter,
   },
 
   {
