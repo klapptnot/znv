@@ -4,8 +4,14 @@ return {
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
   {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = funcs.treesitter,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.5",
     opts = {},
   },
 
@@ -57,7 +63,6 @@ return {
 
   {
     "j-hui/fidget.nvim",
-    tag = "v1.6.1", -- Make sure to update this to something recent!
     event = { "LspAttach" },
     opts = {
       progress = {
@@ -159,12 +164,6 @@ return {
     "nanozuki/tabby.nvim",
     event = "VimEnter",
     config = funcs.tabby,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = funcs.treesitter,
   },
 
   {
@@ -298,11 +297,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile", "BufWinEnter" },
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-      },
-    },
+    opts = {},
   },
 
   {
